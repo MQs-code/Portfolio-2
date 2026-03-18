@@ -93,7 +93,7 @@ export default function HeroScene() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-4 md:space-y-8"
         >
           <h4 className="text-emerald-500 font-mono text-[9px] md:text-[11px] tracking-[0.8em] md:tracking-[1.2em] uppercase opacity-80">
