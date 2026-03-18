@@ -1,0 +1,42 @@
+import Introduction from './Introduction'
+import Kinetictext from './Kinectictext'
+import ThreeDshape from './ThreeDshape'
+import Stack from './Stack'
+import Projects from '../Projects/page.jsx'
+import Feedback from '../Feedback/feedback.jsx'
+
+export default function Page() {
+  return (
+    <main className="w-full bg-[#030303]"> 
+      {/* 1. Hero / Intro Section */}
+      <section className="min-h-screen">
+        <Introduction />
+      </section>
+
+      {/* 2. Kinetic Text Animation */}
+      <section className="py-20">
+        <Kinetictext />
+      </section>
+
+      {/* 3. 3D Visuals */}
+      <section className="w-full h-screen px-10">
+        <ThreeDshape />
+      </section>
+
+      {/* 4. Technical Stack (Pinned Scroll) */}
+      <section>
+        <Stack/>
+      </section>
+
+      {/* 5. Projects (Horizontal Scroll) */}
+      <section id='projects'>
+        <Projects/>
+      </section>
+
+      {/* 6. Feedback (Final Footer / End Section) */}
+      <section className="relative z-10 bg-[#030303]" id='feedback'>
+        <Feedback/>
+      </section>
+    </main>
+  );
+}
