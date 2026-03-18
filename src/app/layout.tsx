@@ -9,14 +9,14 @@ import { Home } from "lucide-react";
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-poppins" });
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Current route track karega
 
   // Check karein ke user Contact page par hai ya nahi
   const isContactPage = pathname === "/contact";
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (id: string) => {
     setIsOpen(false); 
     const element = document.getElementById(id);
     if (element) {
