@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { usePathname } from "next/navigation"; // Pathname detect karne ke liye
+import { useRouter,usePathname } from "next/navigation"; // Pathname detect karne ke liye
 import { Outfit, Poppins } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { Home } from "lucide-react";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-poppins" });
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
-
+ 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${outfit.variable} ${poppins.variable} font-sans antialiased bg-[#030303] text-white overflow-x-hidden`}>
