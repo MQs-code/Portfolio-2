@@ -148,40 +148,44 @@ export default function TechStack() {
             <div className="absolute inset-[30%] rounded-full border border-emerald-500 border-dashed" />
 
             {STACK.map((item, i) => {
-              const angle = (Math.PI) + (i * (Math.PI / (STACK.length - 1)));
-              
-              return (
-                <div
-                  key={`icon-${i}`}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [--radius:120px] lg:[--radius:400px]"
-                  style={{
-                    transform: `translate(calc(var(--radius) * ${Math.cos(angle).toFixed(6)}), calc(var(--radius) * ${Math.sin(angle).toFixed(6)}))`,
-                  }}
-                >
-                  <div className="relative group cursor-pointer">
-                    <div 
-                      ref={(el) => (iconRefs.current[i] = el)}
-                      className="w-14 h-14 md:w-32 md:h-32 rounded-full bg-[#050505] border border-white/10 flex flex-col items-center justify-center backdrop-blur-3xl transition-all duration-300 overflow-hidden"
-                    >
-                      {item.type === "image" ? (
-                        <div className="relative w-full h-full p-4 md:p-8">
-                          <Image 
-                            src={item.img}
-                            alt={item.name}
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                      ) : (
-                        <span className="text-sm md:text-3xl font-bungee italic tracking-tighter" style={{ color: item.color }}>
-                          {item.icon}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+  const angle = (Math.PI) + (i * (Math.PI / (STACK.length - 1)));
+  
+  return (
+    <div
+      key={`icon-${i}`}
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [--radius:120px] lg:[--radius:400px]"
+      style={{
+        transform: `translate(calc(var(--radius) * ${Math.cos(angle).toFixed(6)}), calc(var(--radius) * ${Math.sin(angle).toFixed(6)}))`,
+      }}
+    >
+      <div className="relative group cursor-pointer">
+        <div 
+          ref={(el) => (iconRefs.current[i] = el)}
+          className="w-14 h-14 md:w-32 md:h-32 rounded-full bg-[#050505] border border-white/10 flex flex-col items-center justify-center backdrop-blur-3xl transition-all duration-300 overflow-hidden"
+        >
+          {item.type === "image" ? (
+            <div className="relative w-full h-full p-4 md:p-8 bg-white/5"> {/* Added bg-white/5 as a fast visual fallback */}
+              <Image 
+                src={item.img}
+                alt={item.name}
+                fill
+                priority // Tells Next.js to preload this image
+                loading="eager" // Forces the browser to fetch immediately
+                fetchPriority="high" // Modern browser hint for critical assets
+                className="object-contain"
+                sizes="(max-width: 768px) 56px, 128px" // Helps browser pick the right size instantly
+              />
+            </div>
+          ) : (
+            <span className="text-sm md:text-3xl font-bungee italic tracking-tighter" style={{ color: item.color }}>
+              {item.icon}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+})}
           </div>
         </div>
       </div>

@@ -83,37 +83,90 @@ export default function ProjectSection() {
 
 function ProjectCard({ project, index }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0); // Real-time feedback
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Smart Play/Pause: Only play when card is visible to save GPU
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Track actual buffer progress to show the user "something is happening"
+    const handleProgress = () => {
+      if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const duration = video.duration;
+        if (duration > 0) {
+          setLoadProgress((bufferedEnd / duration) * 100);
+        }
+      }
+    };
+
+    video.addEventListener("progress", handleProgress);
+    video.load();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            videoRef.current?.play().catch(() => {});
+            video.play().catch(() => {});
           } else {
-            videoRef.current?.pause();
+            video.pause();
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    if (videoRef.current) observer.observe(videoRef.current);
-    return () => observer.disconnect();
+    observer.observe(video);
+    return () => {
+      video.removeEventListener("progress", handleProgress);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <div className="relative shrink-0 w-[80vw] md:w-[38vw] aspect-[4/5] md:aspect-square group">
-      <div className="relative w-full h-full overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 shadow-2xl transition-all duration-700">
+    <div className="relative shrink-0 w-[85vw] md:w-[38vw] aspect-[4/5] md:aspect-square group">
+      <div className="relative w-full h-full overflow-hidden rounded-[2.5rem] bg-[#050505] border border-white/5 shadow-2xl transition-all duration-700">
         
+        {/* HIGH-ENGAGEMENT FALLBACK */}
         {!isLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#080808] z-10">
-            <div className="w-6 h-6 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#080808]">
+            {/* 1. Animated Scanning Line */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/10 to-transparent h-1/2 w-full animate-[scan_2s_linear_infinite] z-10" />
+            
+            {/* 2. Project Number Watermark */}
+            <span className="absolute top-10 left-10 text-[10rem] font-black text-white/[0.02] select-none">
+              0{index + 1}
+            </span>
+
+            {/* 3. Centered Loading Status */}
+            <div className="relative z-20 flex flex-col items-center gap-4">
+              <div className="relative w-16 h-16">
+                {/* Spinning Ring */}
+                <div className="absolute inset-0 border-2 border-emerald-500/20 rounded-full" />
+                <div 
+                  className="absolute inset-0 border-2 border-t-emerald-500 rounded-full animate-spin" 
+                  style={{ animationDuration: '0.6s' }}
+                />
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <span className="text-emerald-500 font-mono text-[10px] tracking-[0.3em] uppercase animate-pulse">
+                  Initializing Media
+                </span>
+                {/* Real-time percentage to keep them watching */}
+                <span className="text-neutral-600 font-mono text-[9px] mt-1">
+                  {Math.round(loadProgress)}% SECURED
+                </span>
+              </div>
+            </div>
+
+            {/* 4. Bottom Progress Bar */}
+            <div className="absolute bottom-0 left-0 h-[2px] bg-emerald-500/30 transition-all duration-300" style={{ width: `${loadProgress}%` }} />
           </div>
         )}
 
+        {/* THE VIDEO */}
         <video
           ref={videoRef}
           src={project.video}
@@ -121,27 +174,38 @@ function ProjectCard({ project, index }) {
           muted
           playsInline
           autoPlay
-          preload="metadata" // Changed to metadata for faster initial page load
+          preload="auto"
           onLoadedData={() => setIsLoaded(true)}
-          className={`w-full h-full object-cover transform-gpu transition-opacity duration-700 ${
-            isLoaded ? "opacity-100" : "opacity-0"
+          className={`w-full h-full object-cover transform-gpu transition-all duration-[1500ms] ease-expo ${
+            isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-125 blur-3xl"
           }`}
-          style={{ transform: "translateZ(0)" }} // Force GPU layer
         />
         
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60 pointer-events-none" />
+        {/* Vignette for depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-      <div className="mt-8 flex flex-col items-start translate-x-2">
+      {/* Info Section */}
+      <div className="mt-8 flex flex-col items-start translate-x-2 group-hover:translate-x-4 transition-transform duration-500">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-emerald-500 font-mono text-[10px] tracking-widest font-bold">0{index + 1}</span>
-          <div className="w-4 h-[1px] bg-neutral-800" />
-          <span className="text-neutral-500 font-mono text-[9px] uppercase tracking-[0.4em]">Project</span>
+          <div className="w-8 h-[1px] bg-emerald-500/20 group-hover:w-12 group-hover:bg-emerald-500 transition-all duration-500" />
+          <span className="text-neutral-500 font-mono text-[9px] uppercase tracking-[0.4em]">Case Study</span>
         </div>
-        <h5 className="text-white text-xl md:text-3xl font-black uppercase tracking-tight leading-none">
+        <h5 className="text-white text-2xl md:text-4xl font-black uppercase tracking-tight leading-none">
           {project.title}
         </h5>
       </div>
+
+      <style jsx global>{`
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(200%); }
+        }
+        .ease-expo {
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+      `}</style>
     </div>
   );
 }
