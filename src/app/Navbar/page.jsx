@@ -77,7 +77,7 @@ export default function Navbar() {
               }} 
               className="text-2xl font-bold uppercase tracking-widest hover:text-emerald-500"
             >
-              Projects
+              Work
             </button>
           )}
           
