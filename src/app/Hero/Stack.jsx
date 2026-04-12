@@ -9,131 +9,79 @@ if (typeof window !== "undefined") {
 }
 
 const STACK = [
-  { 
-    name: "Next.js", 
-    type: "text",
-    icon: "NX",
-    color: "#ffffff", 
-    desc: "Enterprise-grade performance and SEO." 
-  },
-  { 
-    name: "Tailwind", 
-    type: "image",
-    img: "/tailwind-css.png", 
-    color: "#38bdf8", 
-    desc: "Rapid UI development with utility-first CSS." 
-  },
-  { 
-    name: "Three.js", 
-    type: "text",
-    icon: "R3F",
-    color: "#10b981", 
-    desc: "Immersive 3D experiences rendered in WebGL." 
-  },
-  { 
-    name: "GSAP", 
-    type: "image",
-    img: "/gsap.png", 
-    color: "#88ce02", 
-    desc: "Industry-leading motion design and complex animations." 
-  },
-  { 
-    name: "React.js", 
-    type: "image",
-    img: "/react.png", 
-    color: "#3ecf8e", 
-    desc: "Scalable frontend infrastructure and components." 
-  },
+  { name: "Next.js", type: "text", icon: "NX", color: "#ffffff", desc: "Enterprise-grade performance and SEO." },
+  { name: "Tailwind", type: "image", img: "/tailwind-css.png", color: "#38bdf8", desc: "Rapid UI development with utility-first CSS." },
+  { name: "Three.js", type: "text", icon: "R3F", color: "#10b981", desc: "Immersive 3D experiences rendered in WebGL." },
+  { name: "GSAP", type: "image", img: "/gsap.png", color: "#88ce02", desc: "Industry-leading motion design and complex animations." },
+  { name: "React.js", type: "image", img: "/react.png", color: "#3ecf8e", desc: "Scalable frontend infrastructure and components." },
 ];
 
 export default function TechStack() {
   const containerRef = useRef(null);
   const ringRef = useRef(null);
   const textContainerRef = useRef(null);
-  const headingRef = useRef(null); // Ref for title animation
   const iconRefs = useRef([]);
 
- useLayoutEffect(() => {
+  useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
 
-      // Initial Entry
-      gsap.fromTo(headingRef.current, 
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power4.out" }
-      );
-
+      // PERFORMANCE FIX: Use a lower scrub value (0.5) for more responsiveness
+      // and force 3D rendering with force3D: true
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: isMobile ? "+=150%" : "+=300%", // Slightly shorter for faster feel
+          end: isMobile ? "+=100%" : "+=200%", 
           pin: true,
-          scrub: 1, // Fixed scrub for "buttery" smoothing
-          snap: {
-            snapTo: 1 / (STACK.length - 1), // This forces it to land perfectly on each icon
-            duration: { min: 0.2, max: 0.8 }, // Duration of the snap
-            ease: "power2.inOut", // Smooth snapping
-          },
+          scrub: 0.5, 
+          snap: 1 / (STACK.length - 1),
           invalidateOnRefresh: true,
         },
       });
 
-      // Set initial glow
-      gsap.set(iconRefs.current[0], { 
-        borderColor: STACK[0].color, 
-        boxShadow: `0 0 30px ${STACK[0].color}44` 
-      });
-
+      // Optimization: Batch text and ring rotation
       STACK.forEach((item, i) => {
         if (i === 0) return;
         
-        // The timeline step
         tl.to(ringRef.current, {
           rotation: -i * (180 / (STACK.length - 1)),
-          ease: "power2.inOut",
+          force3D: true, // Forces GPU layer
+          ease: "sine.inOut",
         }, i)
         .to(textContainerRef.current, {
           yPercent: -i * 100,
-          ease: "expo.inOut",
-        }, i)
-        // Transitions for icon glows - reduced duration for "pop"
-        .to(iconRefs.current[i-1], { 
-          borderColor: "rgba(255,255,255,0.1)", 
-          boxShadow: "none",
-          duration: 0.1 
-        }, i)
-        .to(iconRefs.current[i], { 
-          borderColor: item.color, 
-          boxShadow: `0 0 40px ${item.color}66`,
-          duration: 0.1 
+          force3D: true,
+          ease: "power2.inOut",
         }, i);
+
+        // Optimized Glow Transition
+        tl.to(iconRefs.current[i-1], { borderColor: "rgba(255,255,255,0.1)", boxShadow: "none", duration: 0.2 }, i)
+          .to(iconRefs.current[i], { borderColor: item.color, boxShadow: `0 0 30px ${item.color}44`, duration: 0.2 }, i);
       });
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
+
   return (
-    <section ref={containerRef} className="relative h-screen w-full bg-[#030303] overflow-hidden flex items-center">
+    <section ref={containerRef} className="relative h-screen w-full bg-[#030303] overflow-hidden flex items-center selection:bg-emerald-500/30">
       
-      {/* Dynamic Background Glow */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[40vw] h-[40vw] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* GPU Optimized Glow */}
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[40vw] h-[40vw] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none will-change-transform" />
 
-      {/* Main Animated Title */}
-      
-
-      <div className="container mx-auto px-8 md:px-24 grid grid-cols-1 lg:grid-cols-2 items-center w-full z-10 pt-20">
+      <div className="container mx-auto px-8 md:px-24 grid grid-cols-1 lg:grid-cols-2 items-center w-full z-10">
         
-        <div className="relative h-[200px] md:h-[450px] overflow-hidden">
+        {/* Left Side: Text */}
+        <div className="relative h-[200px] md:h-[350px] overflow-hidden will-change-transform">
           <div ref={textContainerRef} className="flex flex-col h-full">
             {STACK.map((item, index) => (
               <div key={index} className="h-full flex flex-col justify-center shrink-0">
-                <h2 className="text-4xl md:text-[7rem] font-bold uppercase tracking-[-0.05em] text-white leading-[0.8]">
+                <h2 className="text-4xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
                   {item.name}
                 </h2>
-                <div className="mt-10 max-w-sm space-y-4">
-                   <div className="h-[1px] w-12 bg-emerald-500/40" />
-                   <p className="text-neutral-500 font-light text-lg md:text-xl leading-relaxed tracking-wide">
+                <div className="mt-6 max-w-sm">
+                   <p className="text-neutral-500 font-light text-base md:text-lg leading-relaxed">
                      {item.desc}
                    </p>
                 </div>
@@ -142,53 +90,41 @@ export default function TechStack() {
           </div>
         </div>
 
+        {/* Right Side: Optimized Ring */}
         <div className="relative flex items-center justify-end h-full">
           <div 
             ref={ringRef}
-            className="relative w-[300px] md:w-[85vw] aspect-square rounded-full border border-[10px] border-white/10 md:translate-x-[50%] translate-x-[0] mt-20 md:mt-0 flex items-center justify-center"
+            // will-change-transform is the secret for smooth rotation
+            className="relative w-[300px] md:w-[70vw] aspect-square rounded-full border border-[1px] border-white/10 md:translate-x-[50%] flex items-center justify-center will-change-transform"
           >
-            <div className="absolute inset-[15%] rounded-full border border-white/[0.3]" />
-            <div className="absolute inset-[30%] rounded-full border border-emerald-500 border-dashed" />
-
             {STACK.map((item, i) => {
-  const angle = (Math.PI) + (i * (Math.PI / (STACK.length - 1)));
-  
-  return (
-    <div
-      key={`icon-${i}`}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [--radius:120px] lg:[--radius:400px]"
-      style={{
-        transform: `translate(calc(var(--radius) * ${Math.cos(angle).toFixed(6)}), calc(var(--radius) * ${Math.sin(angle).toFixed(6)}))`,
-      }}
-    >
-      <div className="relative group cursor-pointer">
-        <div 
-          ref={(el) => (iconRefs.current[i] = el)}
-          className="w-14 h-14 md:w-32 md:h-32 rounded-full bg-[#050505] border border-white/10 flex flex-col items-center justify-center backdrop-blur-3xl transition-all duration-300 overflow-hidden"
-        >
-          {item.type === "image" ? (
-            <div className="relative w-full h-full p-4 md:p-8 bg-white/5"> {/* Added bg-white/5 as a fast visual fallback */}
-              <Image 
-                src={item.img}
-                alt={item.name}
-                fill
-                priority // Tells Next.js to preload this image
-                loading="eager" // Forces the browser to fetch immediately
-                fetchPriority="high" // Modern browser hint for critical assets
-                className="object-contain"
-                sizes="(max-width: 768px) 56px, 128px" // Helps browser pick the right size instantly
-              />
-            </div>
-          ) : (
-            <span className="text-sm md:text-3xl font-bungee italic tracking-tighter" style={{ color: item.color }}>
-              {item.icon}
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-})}
+              const angle = (Math.PI) + (i * (Math.PI / (STACK.length - 1)));
+              const x = Math.cos(angle) * 100;
+              const y = Math.sin(angle) * 100;
+
+              return (
+                <div
+                  key={`icon-${i}`}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [--radius:125px] lg:[--radius:35vw] will-change-transform"
+                  style={{
+                    transform: `translate(calc(var(--radius) * ${Math.cos(angle)}), calc(var(--radius) * ${Math.sin(angle)}))`,
+                  }}
+                >
+                  <div 
+                    ref={(el) => (iconRefs.current[i] = el)}
+                    className="w-12 h-12 md:w-28 md:h-28 rounded-full bg-[#080808] border border-white/10 flex items-center justify-center overflow-hidden transition-shadow"
+                  >
+                    {item.type === "image" ? (
+                      <div className="relative w-1/2 h-1/2">
+                        <Image src={item.img} alt={item.name} fill className="object-contain" sizes="120px" priority />
+                      </div>
+                    ) : (
+                      <span className="text-xs md:text-2xl font-bold italic" style={{ color: item.color }}>{item.icon}</span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
