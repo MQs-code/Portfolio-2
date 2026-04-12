@@ -25,3 +25,29 @@ body {
   /* Default font ko outfit (sans) par set kar diya */
   font-family: var(--font-outfit), sans-serif;
 }
+@layer base {
+  html, body {
+    @apply bg-[#030303] overflow-x-hidden;
+    /* Force GPU rendering for the whole page */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+  }
+}
+/* Smooth fade-in for the whole page once loading.tsx is done */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gpu-accelerated {
+  animation: fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Forces GPU */
+}

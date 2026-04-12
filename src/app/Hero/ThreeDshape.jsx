@@ -1,8 +1,7 @@
 "use client";
-
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, ContactShadows } from "@react-three/drei";
+import { Float, ContactShadows, Preload } from "@react-three/drei";
 import { motion } from "framer-motion";
 import * as THREE from "three";
 import Link from "next/link";
@@ -11,47 +10,42 @@ function FloatingIcon({ position, color, type }) {
   const meshRef = useRef(null);
   const { viewport } = useThree();
 
+  // Optimization: Pre-calculate responsiveness
   const isMobile = viewport.width < 10;
   const responsiveScale = isMobile ? 0.6 : 1;
-
   const responsivePosition = [
     position[0] * (viewport.width / 18),
     position[1] * (viewport.height / 12),
     position[2],
   ];
 
-useFrame((state) => {
-  if (meshRef.current) {
-    const t = state.clock.getElapsedTime();
-    if (window.innerWidth > 768) {
-      const { x, y } = state.mouse;
-      meshRef.current.lookAt(new THREE.Vector3(x * 4, y * 4, 5));
+  useFrame((state) => {
+    if (meshRef.current) {
+      const t = state.clock.getElapsedTime();
+      // Optimization: Only run mouse logic on desktop to save mobile CPU
+      if (typeof window !== "undefined" && window.innerWidth > 768) {
+        const { x, y } = state.mouse;
+        meshRef.current.lookAt(new THREE.Vector3(x * 2, y * 2, 5));
+      }
+      meshRef.current.rotation.z += Math.sin(t * 0.5) * 0.002;
     }
-    meshRef.current.rotation.z += Math.sin(t * 0.5) * 0.002;
-  }
-});
+  });
 
   return (
-    <Float
-      speed={3}
-      rotationIntensity={2}
-      floatIntensity={2.5}
-      position={responsivePosition}
-    >
+    <Float speed={2} rotationIntensity={1.5} floatIntensity={2} position={responsivePosition}>
       <mesh ref={meshRef} scale={responsiveScale}>
         {type === "cube" && <boxGeometry args={[1.2, 1.2, 1.2]} />}
-        {type === "torus" && <torusGeometry args={[0.8, 0.25, 16, 100]} />}
+        {type === "torus" && <torusGeometry args={[0.8, 0.25, 12, 64]} />} {/* Optimized segments */}
         {type === "dode" && <dodecahedronGeometry args={[1.1]} />}
         {type === "ico" && <icosahedronGeometry args={[1.1]} />}
-        {type === "octa" && <octahedronGeometry args={[1.1]} />}
         {type === "tetra" && <tetrahedronGeometry args={[1.1]} />}
 
         <meshStandardMaterial
           color={color}
-          roughness={0.05}
-          metalness={0.9}
+          roughness={0.1}
+          metalness={0.8}
           emissive={color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.1}
         />
       </mesh>
     </Float>
@@ -62,33 +56,34 @@ export default function HeroScene() {
   return (
     <div className="relative w-full h-screen bg-[#050505] overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 18], fov: 35 }} dpr={[1, 2]}>
-          <ambientLight intensity={1.5} />
-          <pointLight position={[10, 10, 10]} intensity={150} />
+        {/* Optimization: Set dpr to [1, 1.5] for performance. [1, 2] is too heavy for some mobile GPUs */}
+        <Canvas 
+          camera={{ position: [0, 0, 18], fov: 35 }} 
+          dpr={[1, 1.5]} 
+          gl={{ antialias: true, powerPreference: "high-performance" }}
+        >
+          <Suspense fallback={null}>
+            <ambientLight intensity={1} />
+            <pointLight position={[10, 10, 10]} intensity={50} />
 
-          {/* Left Side Cluster */}
-          <FloatingIcon position={[-5, 3, 0]} color="#ffffff" type="cube" />
-          <FloatingIcon position={[-6, -1, 2]} color="#10b981" type="tetra" />
-          <FloatingIcon position={[-4, -4, 1]} color="#10b981" type="dode" />
+            <FloatingIcon position={[-5, 3, 0]} color="#ffffff" type="cube" />
+            <FloatingIcon position={[-6, -1, 2]} color="#10b981" type="tetra" />
+            <FloatingIcon position={[-4, -4, 1]} color="#10b981" type="dode" />
+            <FloatingIcon position={[5, 4, -1]} color="#ffffff" type="ico" />
+            <FloatingIcon position={[4, -5, -6]} color="#10b981" type="torus" />
 
-          {/* Right Side Cluster */}
-          <FloatingIcon position={[5, 4, -1]} color="#ffffff" type="ico" />
-          <FloatingIcon position={[4, -5, -6]} color="#10b981" type="torus" />
-
-          {/* Background & Center Depth */}
-          <FloatingIcon position={[5, -3, 2]} color="#ffffff" type="sphere" />
-          <FloatingIcon position={[0, 0, -7]} color="#222222" type="ico" />
-
-          <ContactShadows
-            position={[0, -8, 0]}
-            opacity={0.3}
-            scale={35}
-            blur={3}
-            color="#10b981"
-          />
+            <ContactShadows
+              position={[0, -8, 0]}
+              opacity={0.3}
+              scale={35}
+              blur={2.5}
+              color="#10b981"
+            />
+            {/* Optimization: Pre-renders assets so there is no blink when moving */}
+            <Preload all />
+          </Suspense>
         </Canvas>
       </div>
-
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pointer-events-none">
        <motion.div
   viewport={{ once: true, margin: "-50px" }}
