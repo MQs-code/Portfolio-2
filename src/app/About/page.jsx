@@ -73,7 +73,7 @@ export default function AboutPage() {
             <section className="reveal">
               <h2 className="text-emerald-500 font-mono text-[10px] uppercase tracking-[0.5em] mb-4 md:mb-6">The Philosophy</h2>
               <p className="text-lg md:text-2xl text-neutral-300 font-light leading-relaxed">
-                I don’t just build websites; I construct digital <span className="text-white font-bold">atmospheres</span>. By merging high-end motion to make the web alive, I help brands bridge the gap between static design and immersive reality.
+                I don’t just build websites; I construct digital <span className="text-white font-bold">atmospheres</span>. By merging high-end motion to make the web alive also Appreciate the Usage of Ai, I help brands bridge the gap between static design and immersive reality.
               </p>
             </section>
 
