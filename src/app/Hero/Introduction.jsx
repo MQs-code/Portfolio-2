@@ -5,17 +5,24 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Introduction() {
+  const [isOpen, setIsOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+   const handleNavClick = (id) => {
+    setIsOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   return (
     <main className="relative w-full bg-[#050505] pt-20 md:pt-0">
       
-      {/* Using min-h-[100dvh] ensures the section fills the screen 
-          even when mobile browser bars disappear.
-      */}
+     
       <section className="flex flex-col lg:flex-row min-h-[100dvh] w-full text-white relative">
         
-        {/* LEFT CONTENT: Text & Button (Priority 1) */}
         <div className="w-full lg:w-[50vw] flex flex-col justify-center p-8 md:p-16 lg:p-24 relative z-10 order-1">
           <motion.div
             initial={{ opacity: 0, x: -10 }}
@@ -55,8 +62,8 @@ export default function Introduction() {
              transition={{ delay: 0.2 }}
              className="mt-10"
           >
-            <button className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-transform">
-              <span className="relative z-10 text-[13px] font-bold uppercase tracking-[0.2em] text-white">
+            <button onClick={()=> handleNavClick ('projects')} className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-transform">
+              <span className="relative z-10 text-[13px] font-bold uppercase tracking-[0.2em] text-white group-hover:text-black">
                 Explore Work
               </span>
               <div className="absolute inset-0 bg-white translate-y-full lg:group-hover:translate-y-0 transition-transform duration-300" />
@@ -64,12 +71,8 @@ export default function Introduction() {
           </motion.div>
         </div>
 
-        {/* RIGHT VISUAL: The Heavy Image (Priority 2) */}
         <div className="w-full lg:w-[50vw] relative flex justify-center items-center h-[40svh] lg:h-screen order-2">
-          
-          {/* This container is locked. We use 'will-change-transform' to 
-              tell the GPU to handle this separately from the scroll thread.
-          */}
+       
           <div className="relative w-[80%] aspect-square z-10 will-change-transform">
             <AnimatePresence>
               {!isLoaded && (
@@ -77,7 +80,6 @@ export default function Introduction() {
                   exit={{ opacity: 0 }}
                   className="absolute inset-0 z-20 flex items-center justify-center"
                 >
-                  {/* Subtle loader so it doesn't look broken */}
                   <div className="w-5 h-5 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
                 </motion.div>
               )}
@@ -97,7 +99,6 @@ export default function Introduction() {
             />
           </div>
 
-          {/* Low-impact background glow */}
           <div className="absolute w-[50%] aspect-square bg-emerald-500/[0.03] blur-[120px] rounded-full -z-10" />
         </div>
       </section>
