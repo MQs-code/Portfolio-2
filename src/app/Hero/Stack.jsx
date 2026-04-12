@@ -53,28 +53,33 @@ export default function TechStack() {
   const headingRef = useRef(null); // Ref for title animation
   const iconRefs = useRef([]);
 
-  useLayoutEffect(() => {
+ useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
 
-      // 1. Initial Entry Animation for Title
+      // Initial Entry
       gsap.fromTo(headingRef.current, 
-        { opacity: 0, y: 50, letterSpacing: "1em" },
-        { opacity: 1, y: 0, letterSpacing: "0.4em", duration: 1.5, ease: "expo.out" }
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: "power4.out" }
       );
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: isMobile ? "+=200%" : "+=400%",
+          end: isMobile ? "+=150%" : "+=300%", // Slightly shorter for faster feel
           pin: true,
-          scrub: isMobile ? 0.5 : 1.5,
+          scrub: 1, // Fixed scrub for "buttery" smoothing
+          snap: {
+            snapTo: 1 / (STACK.length - 1), // This forces it to land perfectly on each icon
+            duration: { min: 0.2, max: 0.8 }, // Duration of the snap
+            ease: "power2.inOut", // Smooth snapping
+          },
           invalidateOnRefresh: true,
         },
       });
 
-      // Pehla icon glow state
+      // Set initial glow
       gsap.set(iconRefs.current[0], { 
         borderColor: STACK[0].color, 
         boxShadow: `0 0 30px ${STACK[0].color}44` 
@@ -83,6 +88,7 @@ export default function TechStack() {
       STACK.forEach((item, i) => {
         if (i === 0) return;
         
+        // The timeline step
         tl.to(ringRef.current, {
           rotation: -i * (180 / (STACK.length - 1)),
           ease: "power2.inOut",
@@ -91,25 +97,22 @@ export default function TechStack() {
           yPercent: -i * 100,
           ease: "expo.inOut",
         }, i)
+        // Transitions for icon glows - reduced duration for "pop"
         .to(iconRefs.current[i-1], { 
           borderColor: "rgba(255,255,255,0.1)", 
           boxShadow: "none",
-          duration: 0 
+          duration: 0.1 
         }, i)
         .to(iconRefs.current[i], { 
           borderColor: item.color, 
           boxShadow: `0 0 40px ${item.color}66`,
-          duration: 0 
+          duration: 0.1 
         }, i);
       });
     }, containerRef);
 
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ctx.revert();
   }, []);
-
   return (
     <section ref={containerRef} className="relative h-screen w-full bg-[#030303] overflow-hidden flex items-center">
       

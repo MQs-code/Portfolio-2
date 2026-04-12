@@ -3,7 +3,6 @@ import Kinetictext from './Kinectictext'
 import ThreeDshape from './ThreeDshape'
 import Stack from './Stack'
 import Projects from '../Projects/page.jsx'
-import Feedback from '../Feedback/feedback.jsx'
 
 export default function Page() {
   return (
@@ -14,7 +13,7 @@ export default function Page() {
       </section>
 
       {/* 2. Kinetic Text Animation */}
-      <section className="py-20">
+      <section className="py-5">
         <Kinetictext />
       </section>
 
@@ -33,10 +32,7 @@ export default function Page() {
         <Projects/>
       </section>
 
-      {/* 6. Feedback (Final Footer / End Section) */}
-      <section className="relative z-10 bg-[#030303]" id='feedback'>
-        <Feedback/>
-      </section>
+    
     </main>
   );
 }
