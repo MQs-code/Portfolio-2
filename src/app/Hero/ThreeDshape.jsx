@@ -7,6 +7,7 @@ import * as THREE from "three";
 import Link from "next/link";
 
 function FloatingIcon({ position, color, type }) {
+  
   const meshRef = useRef(null);
   const { viewport } = useThree();
 
@@ -73,6 +74,7 @@ export default function HeroScene() {
             <FloatingIcon position={[4, -5, -6]} color="#10b981" type="torus" />
 
             <ContactShadows
+              frames={1}
               position={[0, -8, 0]}
               opacity={0.3}
               scale={35}
@@ -88,7 +90,7 @@ export default function HeroScene() {
        <motion.div
   viewport={{ once: true, margin: "-50px" }}
   initial={{ opacity: 0, y: 10 }} 
-  whileInView={{ opacity: 1, y: 0 }}
+   animate={{ opacity: 1, y: 0 }}
   transition={{ 
     duration: 0.4, 
     ease: "easeOut" 

@@ -159,7 +159,7 @@ export default function DemoPage() {
             </h1>
             
             <p className="max-w-2xl text-base md:text-xl text-gray-300 font-light leading-relaxed mb-10 md:mb-14">
-              Designed for your family, your lifestyle, and your weekends. We’ve put a lot of heart into making this a place you’ll love to visit every single day.
+              Designed for your lifestyle, and your weekends. We’ve put a lot of heart into making this a place you’ll love to visit every single day.
             </p>
 
             <div className="relative py-8 md:py-10 px-6 md:px-12 border-y border-white/10 w-full max-w-4xl">
@@ -185,7 +185,7 @@ export default function DemoPage() {
             </h1>
             
             <p className="text-gray-500 text-base md:text-xl font-light max-w-md mx-auto lg:mx-0">
-              From morning coffee to evening shopping, we’re bringing together everything you need in one beautiful, welcoming location.
+              From morning  to evening shopping, we’re bringing together everything you need in one beautiful, welcoming location.
             </p>
 
             <div className="pt-4">
@@ -208,6 +208,9 @@ export default function DemoPage() {
                 src='/show.png'
                 height={900}
                 width={900}
+             
+                priority={true}
+                quality={90}
                 alt="Mall Preview"
                 className="relative rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl object-contain border-2 border-black shadow-green-800 w-full h-auto"
               />
