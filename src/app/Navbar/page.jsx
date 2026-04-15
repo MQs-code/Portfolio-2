@@ -30,7 +30,7 @@ export default function Navbar() {
       <nav className="relative max-w-7xl mx-auto flex justify-between items-center backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-full px-6 py-3 shadow-2xl">
         
         <div className="flex items-center gap-4 z-[210]">
-          <Link href="/" prefetch={true} className="flex items-center gap-3 group">
+          <Link  href="/" prefetch={true} className="flex items-center gap-3 group">
             <div className="bg-white/5 p-2 rounded-full group-hover:bg-emerald-500/20 transition-all duration-500">
               <Home size={18} className="text-white group-hover:text-emerald-500 transition-colors" />
             </div>

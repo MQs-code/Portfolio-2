@@ -52,6 +52,6 @@ body {
   transform: translateZ(0); /* Forces GPU */
 }
 :root {
-  --bg-portfolio: #050505;
+  --bg-porfolio: #050505;
   --bg-demo: #ffffff;
 }

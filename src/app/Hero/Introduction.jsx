@@ -7,7 +7,8 @@ import { useState } from "react";
 export default function Introduction() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-   const handleNavClick = (id) => {
+  
+  const handleNavClick = (id) => {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -19,15 +20,17 @@ export default function Introduction() {
 
   return (
     <main className="relative w-full bg-[#050505] pt-20 md:pt-0">
-      
-     
       <section className="flex flex-col lg:flex-row min-h-[100dvh] w-full text-white relative">
         
         <div className="w-full lg:w-[50vw] flex flex-col justify-center p-8 md:p-16 lg:p-24 relative z-10 order-1">
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -20 }} // Slightly more distance for a smoother slide
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ 
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1] // Custom "Expo" ease: starts fast, ends very smooth
+            }}
+            className="will-change-transform" // Forces GPU rendering
           >
             <h1 className="text-6xl md:text-7xl lg:text-8xl italic font-extralight tracking-tighter leading-none">
               Elite
@@ -38,10 +41,14 @@ export default function Introduction() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="mt-6 space-y-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              delay: 0.15, 
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1] 
+            }}
+            className="mt-6 space-y-6 will-change-transform"
           >
             <h3 className="text-white/40 font-light flex flex-col md:flex-row md:items-baseline gap-2">
               <span className="text-[10px] tracking-[0.3em] uppercase opacity-50">Identity //</span>
@@ -57,23 +64,28 @@ export default function Introduction() {
           </motion.div>
 
           <motion.div
-             initial={{ opacity: 0, y: 10 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.2 }}
+             initial={{ opacity: 0, scale: 0.9 }} // Subtle scale-in for the button
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
              className="mt-10"
           >
-            <button onClick={()=> handleNavClick ('projects')} className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-transform">
-              <span className="relative z-10 text-[13px] font-bold uppercase tracking-[0.2em] text-white group-hover:text-black">
+            <button onClick={()=> handleNavClick ('projects')} className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-all duration-300">
+              <span className="relative z-10 text-[13px] font-bold uppercase tracking-[0.2em] text-white group-hover:text-black transition-colors duration-300">
                 Explore Work
               </span>
-              <div className="absolute inset-0 bg-white translate-y-full lg:group-hover:translate-y-0 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-white translate-y-full lg:group-hover:translate-y-0 transition-transform duration-500 ease-[0.76, 0, 0.24, 1]" />
             </button>
           </motion.div>
         </div>
 
         <div className="w-full lg:w-[50vw] relative flex justify-center items-center h-[40svh] lg:h-screen order-2">
-       
-          <div className="relative w-[80%] aspect-square z-10 will-change-transform">
+          {/* Enhanced Image Container with subtle floating effect */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-[80%] aspect-square z-10 will-change-transform"
+          >
             <AnimatePresence>
               {!isLoaded && (
                 <motion.div 
@@ -90,16 +102,17 @@ export default function Introduction() {
               alt="Portfolio"
               fill
               priority
+              quality={90} // Added quality for crispness
               sizes="(max-width: 768px) 100vw, 50vw"
               onLoadingComplete={() => setIsLoaded(true)}
-           
-              className={`object-contain transition-opacity duration-700 ease-in-out ${
-                isLoaded ? "opacity-100" : "opacity-0"
+              className={`object-contain transition-all duration-1000 ease-in-out ${
+                isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
             />
-          </div>
+          </motion.div>
 
-          <div className="absolute w-[50%] aspect-square bg-emerald-500/[0.03] blur-[120px] rounded-full -z-10" />
+          {/* Increased blur for a more "atmospheric" background glow */}
+          <div className="absolute w-[60%] aspect-square bg-emerald-500/[0.05] blur-[150px] rounded-full -z-10 animate-pulse" style={{ animationDuration: '4s' }} />
         </div>
       </section>
     </main>

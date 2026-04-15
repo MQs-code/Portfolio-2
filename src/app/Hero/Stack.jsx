@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
@@ -21,12 +21,12 @@ export default function TechStack() {
   const ringRef = useRef(null);
   const textContainerRef = useRef(null);
   const iconRefs = useRef([]);
+  const [isReady, setIsReady] = useState(false); // For Fallback control
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
 
-      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -36,6 +36,7 @@ export default function TechStack() {
           scrub: 0.5, 
           snap: 1 / (STACK.length - 1),
           invalidateOnRefresh: true,
+          onRefresh: () => setIsReady(true), // Hide fallback when measurements are done
         },
       });
 
@@ -44,7 +45,7 @@ export default function TechStack() {
         
         tl.to(ringRef.current, {
           rotation: -i * (180 / (STACK.length - 1)),
-          force3D: true, // Forces GPU layer
+          force3D: true,
           ease: "sine.inOut",
         }, i)
         .to(textContainerRef.current, {
@@ -56,13 +57,24 @@ export default function TechStack() {
         tl.to(iconRefs.current[i-1], { borderColor: "rgba(255,255,255,0.1)", boxShadow: "none", duration: 0.2 }, i)
           .to(iconRefs.current[i], { borderColor: item.color, boxShadow: `0 0 30px ${item.color}44`, duration: 0.2 }, i);
       });
+      
+      setIsReady(true);
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full bg-[#030303] overflow-hidden flex items-center selection:bg-emerald-500/30">
+    <section 
+      ref={containerRef} 
+      className="relative min-h-screen w-full bg-[#030303] overflow-hidden flex items-center selection:bg-emerald-500/30"
+    >
+      {/* 1. FALLBACK / SKELETON */}
+      {!isReady && (
+        <div className="absolute inset-0 bg-[#030303] z-50 flex items-center justify-center">
+           <div className="w-10 h-10 border-2 border-emerald-500/10 border-t-emerald-500 rounded-full animate-spin" />
+        </div>
+      )}
       
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[40vw] h-[40vw] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none will-change-transform" />
 
@@ -86,6 +98,7 @@ export default function TechStack() {
           </div>
         </div>
 
+        {/* Right Side: Ring */}
         <div className="relative flex items-center justify-end h-full">
           <div 
             ref={ringRef}
@@ -93,8 +106,6 @@ export default function TechStack() {
           >
             {STACK.map((item, i) => {
               const angle = (Math.PI) + (i * (Math.PI / (STACK.length - 1)));
-              const x = Math.cos(angle) * 100;
-              const y = Math.sin(angle) * 100;
 
               return (
                 <div
@@ -110,11 +121,16 @@ export default function TechStack() {
                   >
                     {item.type === "image" ? (
                       <div className="relative w-1/2 h-1/2">
-                        <Image src={item.img} alt={item.name} 
-                        loading="eager"
-                        fetchPriority="high"
-                        priority={true}
-                        fill className="object-contain" sizes="120px"  />
+                        <Image 
+                          src={item.img} 
+                          alt={item.name} 
+                          priority={true} // High-priority loading
+                          fetchPriority="high"
+                          loading="eager" // Do not lazy load these
+                          fill 
+                          className="object-contain" 
+                          sizes="120px"  
+                        />
                       </div>
                     ) : (
                       <span className="text-xs md:text-2xl font-bold italic" style={{ color: item.color }}>{item.icon}</span>
