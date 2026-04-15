@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${outfit.variable} ${poppins.variable} font-sans antialiased bg-[#030303] text-white overflow-x-hidden`}>
+      <body id="root-body" className={`${outfit.variable} ${poppins.variable} font-sans antialiased bg-[#030303] text-white overflow-x-hidden`}>
         
         {/* Navbar component handles the client-side logic */}
         <Navbar />
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <span className="text-emerald-500 font-mono text-[10px] font-bold uppercase tracking-[0.4em]">Navigation</span>
         <ul className="flex flex-col gap-2">
           <li><a href="/" className="text-neutral-400 text-sm hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">Home</a></li>
-          <li><a href="#projects" className="text-neutral-400 text-sm hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">Projects</a></li>
+          <li><a href="/projects" className="text-neutral-400 text-sm hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">Work</a></li>
           <li><a href="/contact" className="text-neutral-400 text-sm hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">Contact</a></li>
         </ul>
       </div>

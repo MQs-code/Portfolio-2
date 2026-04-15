@@ -104,7 +104,7 @@ export default function AboutPage() {
               
               <div className="mt-10 md:mt-12">
                 <a href="/contact" className="inline-flex items-center gap-4 md:gap-6 group">
-                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest group-hover:text-emerald-400 transition-colors">Start a conversation</span>
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest group-hover:text-emerald-400 transition-colors  ">Start a conversation</span>
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-emerald-500/50 group-hover:scale-110 transition-all">
                     <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_#10b981]" />
                   </div>

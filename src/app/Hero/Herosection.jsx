@@ -35,7 +35,12 @@ const Projects = dynamic(() => import('../Projects/page.jsx'), {
 
 export default function Page() {
   return (
-    <main className="w-full bg-[#030303] selection:bg-emerald-500/30"> 
+    <main className="w-full bg-[#030303] selection:bg-emerald-500/30 ">
+      <div className="hidden" aria-hidden="true">
+        <img src="/tailwind-css.png" rel="preload" />
+        <img src="/gsap.png" rel="preload" />
+        <img src="/react.png" rel="preload" />
+      </div> 
       {/* LCP: Loads Instantly */}
       <section className="min-h-screen">
         <Introduction />

@@ -26,8 +26,7 @@ export default function TechStack() {
     let ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
 
-      // PERFORMANCE FIX: Use a lower scrub value (0.5) for more responsiveness
-      // and force 3D rendering with force3D: true
+      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -40,7 +39,6 @@ export default function TechStack() {
         },
       });
 
-      // Optimization: Batch text and ring rotation
       STACK.forEach((item, i) => {
         if (i === 0) return;
         
@@ -55,7 +53,6 @@ export default function TechStack() {
           ease: "power2.inOut",
         }, i);
 
-        // Optimized Glow Transition
         tl.to(iconRefs.current[i-1], { borderColor: "rgba(255,255,255,0.1)", boxShadow: "none", duration: 0.2 }, i)
           .to(iconRefs.current[i], { borderColor: item.color, boxShadow: `0 0 30px ${item.color}44`, duration: 0.2 }, i);
       });
@@ -67,7 +64,6 @@ export default function TechStack() {
   return (
     <section ref={containerRef} className="relative h-screen w-full bg-[#030303] overflow-hidden flex items-center selection:bg-emerald-500/30">
       
-      {/* GPU Optimized Glow */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[40vw] h-[40vw] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none will-change-transform" />
 
       <div className="container mx-auto px-8 md:px-24 grid grid-cols-1 lg:grid-cols-2 items-center w-full z-10">
@@ -90,11 +86,9 @@ export default function TechStack() {
           </div>
         </div>
 
-        {/* Right Side: Optimized Ring */}
         <div className="relative flex items-center justify-end h-full">
           <div 
             ref={ringRef}
-            // will-change-transform is the secret for smooth rotation
             className="relative w-[300px] md:w-[70vw] aspect-square rounded-full border border-[1px] border-white/10 md:translate-x-[50%] flex items-center justify-center will-change-transform"
           >
             {STACK.map((item, i) => {
@@ -116,7 +110,11 @@ export default function TechStack() {
                   >
                     {item.type === "image" ? (
                       <div className="relative w-1/2 h-1/2">
-                        <Image src={item.img} alt={item.name} fill className="object-contain" sizes="120px" priority />
+                        <Image src={item.img} alt={item.name} 
+                        loading="eager"
+                        fetchPriority="high"
+                        priority={true}
+                        fill className="object-contain" sizes="120px"  />
                       </div>
                     ) : (
                       <span className="text-xs md:text-2xl font-bold italic" style={{ color: item.color }}>{item.icon}</span>
