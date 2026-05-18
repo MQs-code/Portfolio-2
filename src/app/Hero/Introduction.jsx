@@ -97,18 +97,7 @@ export default function Introduction() {
               )}
             </AnimatePresence>
 
-            <Image
-              src="/profile.png"
-              alt="Portfolio"
-              fill
-              priority
-              quality={90} // Added quality for crispness
-              sizes="(max-width: 768px) 100vw, 50vw"
-              onLoadingComplete={() => setIsLoaded(true)}
-              className={`object-contain transition-all duration-1000 ease-in-out ${
-                isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-            />
+        
           </motion.div>
 
           {/* Increased blur for a more "atmospheric" background glow */}

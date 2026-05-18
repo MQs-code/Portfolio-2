@@ -83,6 +83,7 @@ export default function Navbar() {
           
           <Link href='/About' onClick={() => setIsOpen(false)} prefetch={true} className="text-2xl font-bold uppercase tracking-widest hover:text-emerald-500">About</Link>
           <Link href='/Demo ' onClick={() => setIsOpen(false)} prefetch={true} className="text-2xl font-bold uppercase tracking-widest hover:text-emerald-500">Demo</Link>
+          <Link href='/Hbd ' onClick={() => setIsOpen(false)} prefetch={true} className="text-2xl font-bold uppercase tracking-widest hover:text-emerald-500">Hbd To Sis</Link>
           
           <Link href='/contact' prefetch={true} onClick={() => setIsOpen(false)} className="bg-emerald-500 text-black font-black uppercase tracking-widest text-[10px] px-10 py-4 rounded-full mt-4">
             {isContactPage ? "Let's Talk" : "Contact Me"}
