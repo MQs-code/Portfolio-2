@@ -77,7 +77,7 @@ export default function BirthdayPage() {
         <div className="text-center z-10 w-full max-w-4xl px-6 dynamic-fade-in">
           <p className="text-xs sm:text-sm tracking-[0.3em] text-amber-400 uppercase font-semibold mb-6">Also...</p>
           <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extralight text-[#F1E4C3] leading-relaxed tracking-wide mb-10 max-w-3xl mx-auto">
-            Vo na... is dafa sach mein pocket khali thi tou gift skip ho gaya 😂 Chalo mere paise bache maza aya! 🥹 Par choro gift ko, yeh premium website check karo, poori mehnat se vibes code ki hain tumhare liye! ✨ Next time jab paisay ayen gy tou acha sa gift le donga, tab tak isi website ko dekh kar khush hoti raho 🤫 unstable developer ke pass abhi yahi tha 🫂❤️
+            Vo na... is dafa sach mein pocket khali thi tou gift skip ho gaya 😂 Chalo mere paise bache maza aya! 🥹 Par choro gift ko, yeh premium website check karo, poori mehnat se vibes code ki hain tumhare liye! ✨ Next time jab paisay ayen gy tou acha sa gift le donga, tab tak isi website ko dekh kar khush hoti raho🤫. Abhi is 17 saal ky unstable developer ke pass abhi yahi tha 🫂❤️
           </h2>
           <button onClick={nextStep} className="bg-white/5 backdrop-blur-md border border-white/10 text-slate-300 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm tracking-widest uppercase transition-all duration-300 hover:text-amber-400 hover:border-amber-400/30">
             Keep Going →
