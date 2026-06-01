@@ -1,7 +1,8 @@
 'use client'
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Handshake, X } from 'lucide-react';
+import { Handshake, X,ArrowLeft } from 'lucide-react';
+import Link from "next/link"; 
 
 export default function DealPopup({ isOpen, onClose, onContact }) {
   return (
@@ -55,6 +56,13 @@ export default function DealPopup({ isOpen, onClose, onContact }) {
               >
                 Maybe later (OK)
               </button>
+               <Link 
+              href="/About" 
+              className="group inline-flex items-center gap-2 mb-6 text-xs font-bold tracking-widest text-green-900/60 hover:text-green-900 transition-colors duration-300 uppercase"
+            >
+              <ArrowLeft size={14} className="transform group-hover:-translate-x-1 transition-transform duration-300" />
+              Back to Home
+            </Link>
             </div>
           </motion.div>
         </motion.div>

@@ -93,7 +93,8 @@ export default function Introduction() {
               priority
               alt="Miqdam Ali Portfolio Graphic"
               className="object-contain"
-              onLoad={() => setIsLoaded(true)} // Correct Next.js event listener to toggle state
+              onLoad={() => setIsLoaded(true)}
+              className='rounded-2xl' // Correct Next.js event listener to toggle state
             />
           </motion.div>
 

@@ -69,6 +69,7 @@ export default function DemoPage() {
           </div>
 
           <div className="flex items-center gap-4">
+             
             <a href="#" onClick={()=> setshowpop(!showpop)} className="hidden md:flex bg-green-900 text-white py-2 px-6 md:py-3 md:px-8 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-green-800 transition-all shadow-xl shadow-green-900/20">
               Inquire
             </a>
@@ -122,13 +123,7 @@ export default function DemoPage() {
             className="max-w-7xl mx-auto flex flex-col items-center text-center"
           >
             {/* LUXURY INTERACTIVE BACK BUTTON */}
-            <Link 
-              href="/About" 
-              className="group inline-flex items-center gap-2 mb-6 text-xs font-bold tracking-widest text-green-900/60 hover:text-green-900 transition-colors duration-300 uppercase"
-            >
-              <ArrowLeft size={14} className="transform group-hover:-translate-x-1 transition-transform duration-300" />
-              Back to Home
-            </Link>
+           
 
             <div className="inline-block px-4 py-1.5 mb-6 border border-green-800/20 rounded-full bg-green-50">
               <span className="text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-green-900 uppercase">Your New Neighborhood Gathering Spot</span>
@@ -141,10 +136,19 @@ export default function DemoPage() {
             <p className="max-w-2xl text-base md:text-xl text-gray-500 font-light leading-relaxed mb-10 md:mb-12">
               We’re building more than just a mall; we’re creating a space where tradition feels right at home with modern style. Something special is coming.
             </p>
-
-            <button onClick={()=> setshowpop(!showpop)} className="w-full sm:w-auto px-10 py-4 bg-green-900 text-white rounded-full font-bold tracking-widest text-xs uppercase hover:bg-green-800 transition-all transform hover:scale-105 active:scale-95">
+            <div className="flex items-center justify-center gap-6">
+               <Link 
+              href="/About" 
+              className=" inline-flex items-center gap-2  text-xs font-bold tracking-widest text-green-900/60 hover:text-green-900 transition-colors duration-300 uppercase"
+            >
+              <ArrowLeft size={14} className="transform group-hover:-translate-x-1 transition-transform duration-300" />
+              Back to Home
+            </Link>
+             <button onClick={()=> setshowpop(!showpop)} className="w-full sm:w-auto px-10 py-4 bg-green-900 text-white rounded-full font-bold tracking-widest text-xs uppercase hover:bg-green-800 transition-all transform hover:scale-105 active:scale-95">
               Explore the Vision
             </button>
+            </div>
+            
           </motion.div>
         </section>
 
