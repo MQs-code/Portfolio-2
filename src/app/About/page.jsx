@@ -40,8 +40,8 @@ export default function AboutPage() {
           {/* LEFT SIDE: Identity Structure */}
           <div className="lg:sticky lg:top-32 space-y-6 md:space-y-8">
             <div className="flex items-center gap-4 reveal">
-              <span className="h-[1px] w-8 md:w-12 bg-[#00f7ff]" />
-              <span className="text-[#00f7ff] font-mono text-[10px] md:text-[11px] tracking-[0.5em] md:tracking-[0.8em] uppercase">
+              <span className="h-[1px] w-8 md:w-12 text-emerald-500" />
+              <span className="text-emerald-500 font-mono text-[10px] md:text-[11px] tracking-[0.5em] md:tracking-[0.8em] uppercase">
                 Who am I
               </span>
             </div>
@@ -69,14 +69,14 @@ export default function AboutPage() {
             
             {/* THE PHILOSOPHY */}
            <section className="reveal space-y-4 md:space-y-6">
-  <h2 className="text-[#00f7ff] font-mono text-[10px] uppercase tracking-[0.5em]">The Philosophy</h2>
+  <h2 className="text-emerald-500 font-mono text-[10px] uppercase tracking-[0.5em]">The Philosophy</h2>
   <p className="text-xl md:text-2xl text-neutral-300 font-light leading-relaxed">
     I don’t just build apps—I build the way people experience them. By connecting the speed of <span className="text-white font-bold">Next.js</span> on the web with fluid, native interfaces in <span className="text-white font-bold">React Native</span>, I make digital experiences feel natural. I back my workflow with smart AI integration, meaning I spend less time fighting with configuration and more time crafting clean, high-performance interactions that actually matter.
   </p>
 </section>
             {/* UPGRADED EXPERTISE GRID */}
             <section className="reveal space-y-4 md:space-y-6">
-              <h2 className="text-[#00f7ff] font-mono text-[10px] uppercase tracking-[0.5em]">Architecture & Stack</h2>
+              <h2 className="text-emerald-500 font-mono text-[10px] uppercase tracking-[0.5em]">Architecture & Stack</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { title: "Web Platforms", tech: "Next.js / React / TypeScript" },
@@ -94,18 +94,18 @@ export default function AboutPage() {
 
             {/* MISSION OBJECTIVE & CALL TO ACTION */}
             <section className="reveal pb-12 space-y-6">
-              <h2 className="text-[#00f7ff] font-mono text-[10px] uppercase tracking-[0.5em]">Current Focus</h2>
+              <h2 className="text-emerald-500 font-mono text-[10px] uppercase tracking-[0.5em]">Current Focus</h2>
               <p className="text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl">
                 Currently building high-fidelity micro-SaaS products, unified AI operational layers, and elite mobile designs. My focus is absolute optimization—ensuring your platform retains 60 FPS fluidity on any handheld screen or multi-threaded browser.
               </p>
               
               <div className="pt-6">
                 <a href="/contact" className="inline-flex items-center gap-6 group">
-                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-neutral-300 group-hover:text-[#00f7ff] transition-colors duration-300">
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-widest text-neutral-300 group-hover:text-emerald-500 transition-colors duration-300">
                     Initiate Deployment
                   </span>
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-[#00f7ff]/40 group-hover:scale-115 transition-all duration-300 shadow-[0_0_0_0_rgba(0,247,255,0)] group-hover:shadow-[0_0_20px_rgba(0,247,255,0.15)]">
-                    <div className="w-1.5 h-1.5 bg-[#00f7ff] rounded-full shadow-[0_0_10px_#00f7ff]" />
+                    <div className="w-1.5 h-1.5 text-emerald-500 rounded-full shadow-[0_0_10px_#00f7ff]" />
                   </div>
                 </a>
               </div>
