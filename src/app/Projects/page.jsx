@@ -40,6 +40,23 @@ const PROJECTS = [
     desc: "MOTION DRIVEN / INTERACTIVE MODELS",
     details: "Feature-heavy landing pages for innovative physical goods."
   },
+  {
+    id: 5,
+    title: "Mobile Apps",
+    category: "Cross-Platform",
+    internalTitle: "Native Experiences",
+    desc: "SEAMLESS PERFORMANCE / FLOWING INTERACTIONS",
+    details: "Custom-built mobile applications for iOS and Android."
+  },
+  {
+    id: 6,
+    title:'MicroSaas Platforms',
+    category: "Enterprise",
+    internalTitle: "SaaS Solutions",
+    desc: "SCALABLE ARCHITECTURE / USER-CENTRIC DESIGN",
+    details: "SaaS platforms development for growth and efficiency."
+  }
+
 ];
 
 export default function ProjectSection() {
@@ -72,7 +89,7 @@ export default function ProjectSection() {
   }, []);
 
   return (
-    <section ref={triggerRef} className="relative bg-[#020202] overflow-hidden">
+    <section ref={triggerRef} className="relative bg-[#020202] overflow-hidden overflow-y-hidden">
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
       
       <div 

@@ -13,7 +13,7 @@ const STACK = [
   { name: "Tailwind", type: "image", img: "/tailwind-css.png", color: "#38bdf8", desc: "Rapid UI development with utility-first CSS." },
   { name: "Three.js", type: "text", icon: "R3F", color: "#10b981", desc: "Immersive 3D experiences rendered in WebGL." },
   { name: "GSAP", type: "image", img: "/gsap.png", color: "#88ce02", desc: "Industry-leading motion design and complex animations." },
-  { name: "React.js", type: "image", img: "/react.png", color: "#3ecf8e", desc: "Scalable frontend infrastructure and components." },
+  { name: "React native", type: "image", img: "/react.png", color: "#3ecf8e", desc: "Premium, cross-platform native apps micro-interactions" },
 ];
 
 export default function TechStack() {

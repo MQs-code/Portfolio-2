@@ -1,22 +1,22 @@
 'use client'
 
-import { useState } from "react"; // ADDED for toggle logic
+import { useState } from "react"; 
 import Image from "next/image";
+import Link from "next/link"; // IMPORTED for native /home routing
 import KineticText from "./KinecticText";
-import { motion, AnimatePresence } from "framer-motion"; // ADDED AnimatePresence for smooth exit
-import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from "framer-motion"; 
+import { Menu, X, ArrowLeft } from 'lucide-react'; // ADDED ArrowLeft icon for back button
 import Pop from "./Pop";
 import { useRouter } from "next/navigation";
 
 export default function DemoPage() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
-  const [ showpop, setshowpop ] = useState(false)
+  const [showpop, setshowpop] = useState(false)
 
   const Handlepop = () => {
     setshowpop(false)
     router.push('/contact')
-    
   }
 
   const fadeInUp = {
@@ -48,12 +48,13 @@ export default function DemoPage() {
         }
       `}} />
       
-      <main className="min-h-screen w-full">
+      <main className="min-h-screen w-full bg-white">
         <Pop
-        isOpen={showpop}
-        onClose={()=> setshowpop(false)}
-        onContact={Handlepop}
+          isOpen={showpop}
+          onClose={()=> setshowpop(false)}
+          onContact={Handlepop}
         />
+        
         {/* --- LUXURY NAV BAR --- */}
         <section className="fixed top-0 w-full flex justify-between items-center px-4 md:px-12 py-4 md:py-5 z-[100] bg-white/70 backdrop-blur-xl border-b border-black/5">
           <div className="text-xl md:text-2xl font-extrabold tracking-tighter">
@@ -63,9 +64,8 @@ export default function DemoPage() {
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center space-x-10 text-[11px] uppercase tracking-[0.2em] font-bold text-gray-600">
             <button onClick={()=> setshowpop(!showpop)} className="hover:text-green-700 transition-all">Home</button>
-            <button onClick={()=> setshowpop(!showpop)} className="hover:text-green-700 transition-all">Colloction</button>
+            <button onClick={()=> setshowpop(!showpop)} className="hover:text-green-700 transition-all">Collection</button>
             <button onClick={()=> setshowpop(!showpop)} className="hover:text-green-700 transition-all">Vision</button>
-           
           </div>
 
           <div className="flex items-center gap-4">
@@ -91,7 +91,7 @@ export default function DemoPage() {
               animate={{ y: '10%' }}
               exit={{ y: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed rounded-lg  z-10 inset-0 z-[90] bg-white/10 backdrop-blur-md flex flex-col items-center justify-center space-y-8 lg:hidden h-[300px]"
+              className="fixed rounded-lg z-10 inset-0 z-[90] bg-white/10 backdrop-blur-md flex flex-col items-center justify-center space-y-8 lg:hidden h-[300px]"
             >
               <section className="flex flex-col items-center space-y-3">
                 {['Home', 'Collections', 'Our Vision'].map((item) => (
@@ -102,7 +102,6 @@ export default function DemoPage() {
                       setIsMenuOpen(false)
                       setshowpop(!showpop)
                     }}
-                    
                     className="text-xl mt-4 font-bold hover:text-green-700 transition-colors"
                   >
                     {item}
@@ -117,13 +116,22 @@ export default function DemoPage() {
         </AnimatePresence>
 
         {/* --- HERO SECTION --- */}
-        <section className="relative pt-32 pb-16 md:pb-20 px-6">
+        <section className="relative pt-36 pb-16 md:pb-20 px-6">
           <motion.div 
             {...fadeInUp}
             className="max-w-7xl mx-auto flex flex-col items-center text-center"
           >
+            {/* LUXURY INTERACTIVE BACK BUTTON */}
+            <Link 
+              href="/About" 
+              className="group inline-flex items-center gap-2 mb-6 text-xs font-bold tracking-widest text-green-900/60 hover:text-green-900 transition-colors duration-300 uppercase"
+            >
+              <ArrowLeft size={14} className="transform group-hover:-translate-x-1 transition-transform duration-300" />
+              Back to Home
+            </Link>
+
             <div className="inline-block px-4 py-1.5 mb-6 border border-green-800/20 rounded-full bg-green-50">
-                <span className="text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-green-900 uppercase">Your New Neighborhood Gathering Spot</span>
+              <span className="text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-green-900 uppercase">Your New Neighborhood Gathering Spot</span>
             </div>
             
             <h1 className="text-5xl sm:text-7xl md:text-[120px] leading-[1] md:leading-[0.85] serif mb-8">
@@ -185,7 +193,7 @@ export default function DemoPage() {
             </h1>
             
             <p className="text-gray-500 text-base md:text-xl font-light max-w-md mx-auto lg:mx-0">
-              From morning  to evening shopping, we’re bringing together everything you need in one beautiful, welcoming location.
+              From morning to evening shopping, we’re bringing together everything you need in one beautiful, welcoming location.
             </p>
 
             <div className="pt-4">
@@ -208,7 +216,6 @@ export default function DemoPage() {
                 src='/show.png'
                 height={900}
                 width={900}
-             
                 priority={true}
                 quality={90}
                 alt="Mall Preview"

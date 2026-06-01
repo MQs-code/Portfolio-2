@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Introduction() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +24,13 @@ export default function Introduction() {
         
         <div className="w-full lg:w-[50vw] flex flex-col justify-center p-8 md:p-16 lg:p-24 relative z-10 order-1">
           <motion.div
-            initial={{ opacity: 0, x: -20 }} // Slightly more distance for a smoother slide
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ 
               duration: 0.8, 
-              ease: [0.16, 1, 0.3, 1] // Custom "Expo" ease: starts fast, ends very smooth
+              ease: [0.16, 1, 0.3, 1]
             }}
-            className="will-change-transform" // Forces GPU rendering
+            className="will-change-transform"
           >
             <h1 className="text-6xl md:text-7xl lg:text-8xl italic font-extralight tracking-tighter leading-none">
               Elite
@@ -57,19 +57,19 @@ export default function Introduction() {
               </span>
             </h3>
             <p className="max-w-md text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              Architecting the future of the web where
-              <span className="text-white font-bold"> Next.js </span> efficiency meets 
-              <span className="text-emerald-400 font-bold block md:inline"> 3D | React & R3F</span>.
+              Engineering high-performance ecosystems. Crafting lightning-fast 
+              <span className="text-white font-bold"> Web & Mobile </span> applications powered by Next.js, React Native, and immersive 
+              <span className="text-emerald-500 font-bold block md:inline"> 3D Graphics</span>.
             </p>
           </motion.div>
 
           <motion.div
-             initial={{ opacity: 0, scale: 0.9 }} // Subtle scale-in for the button
+             initial={{ opacity: 0, scale: 0.9 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
              className="mt-10"
           >
-            <button onClick={()=> handleNavClick ('projects')} className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-all duration-300">
+            <button onClick={()=> handleNavClick('projects')} className="group relative bg-emerald-500 px-8 py-4 rounded-lg overflow-hidden active:scale-95 transition-all duration-300">
               <span className="relative z-10 text-[13px] font-bold uppercase tracking-[0.2em] text-white group-hover:text-black transition-colors duration-300">
                 Explore Work
               </span>
@@ -78,30 +78,40 @@ export default function Introduction() {
           </motion.div>
         </div>
 
+        {/* IMAGE CONTAINER SECTION */}
         <div className="w-full lg:w-[50vw] relative flex justify-center items-center h-[40svh] lg:h-screen order-2">
-          {/* Enhanced Image Container with subtle floating effect */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.95 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="relative w-[80%] aspect-square z-10 will-change-transform"
           >
-            <AnimatePresence>
-              {!isLoaded && (
-                <motion.div 
-                  exit={{ opacity: 0 }}
-                  className="absolute inset-0 z-20 flex items-center justify-center"
-                >
-                  <div className="w-5 h-5 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-        
+            {/* Core Responsive Asset */}
+            <Image
+              src="/pro.png"
+              fill
+              priority
+              alt="Miqdam Ali Portfolio Graphic"
+              className="object-contain"
+              onLoad={() => setIsLoaded(true)} // Correct Next.js event listener to toggle state
+            />
           </motion.div>
 
-          {/* Increased blur for a more "atmospheric" background glow */}
-          <div className="absolute w-[60%] aspect-square bg-emerald-500/[0.05] blur-[150px] rounded-full -z-10 animate-pulse" style={{ animationDuration: '4s' }} />
+          {/* CONDITIONAL LOADER WITH ANIMATE PRESENCE */}
+          <AnimatePresence>
+            {!isLoaded && (
+              <motion.div 
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 z-20 flex items-center justify-center bg-[#050505]"
+              >
+                <div className="w-6 h-6 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="absolute w-[60%] aspect-square bg-emerald-500/[0.05] blur-[150px] rounded-full -z-10 animate-pulse pointer-events-none" style={{ animationDuration: '4s' }} />
         </div>
       </section>
     </main>
