@@ -57,7 +57,7 @@ export default function Introduction() {
               </span>
             </h3>
             <p className="max-w-md text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-              Engineering high-performance ecosystems. Crafting lightning-fast 
+              Engineering high-performance ecosystems, Crafting lightning-fast 
               <span className="text-white font-bold"> Web & Mobile </span> applications powered by Next.js, React Native, and immersive 
               <span className="text-emerald-500 font-bold block md:inline"> 3D Graphics</span>.
             </p>

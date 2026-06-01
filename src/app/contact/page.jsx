@@ -42,7 +42,7 @@ export default function ContactPage() {
           </h1>
 
        <p className="text-neutral-400 text-base sm:text-lg md:text-xl font-light max-w-xl leading-relaxed tracking-wide">
-  I transform your ideas into real world premium digital product. Open for select collaborations, 
+  I transform your ideas into real world premium digital product. Open for collaborations, 
   crafting immersive <span className="text-emerald-500 font-medium">Web Experiences</span> and , 
   <span className="text-emerald-500 font-medium">Mobile Apps</span> that actually stand out.
 </p>
