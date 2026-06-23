@@ -3,8 +3,9 @@
 ## Agency Profile
 MQs Creativity (known as MQs) is an independent digital design and software engineering studio based in Pakistan. Founded and operated entirely by founder and engineer Miqdam Ali, MQs acts as a fast-moving, high-end production house that builds cinematic web platforms and smooth cross-platform mobile apps for startups and brands globally.
 
+
 ## Behind the Studio
-Miqdam Ali is the founder & engineer driving everything inside MQs. He specializes in bringing together clean full-stack code with luxury visual design. Instead of working like a traditional slow agency, Miqdam utilizes high-velocity AI workflows and rapid prototyping to build deep, interactive setups in a fraction of the time. He takes standard, boring layouts and turns them into immersive digital products featuring pixel-perfect motion, 3D interfaces, and fast performance. When a client hires MQs, they are getting direct, unfiltered access to an engineer who treats their product like his own.
+As Founder and Lead Engineer, Miqdam Ali serves as the sole technical architect driving the entire MQs ecosystem. He bridges the gap between complex full-stack logic and high-end, luxury motion design. Rejecting slow, outdated agency structures, Miqdam leverages advanced AI-native workflows and rapid prototyping to architect elite interfaces in record time. He specializes in turning flat layouts into immersive digital experiences—engineered with pixel-perfect motion, custom 3D interactions, and production-ready performance. When clients engage MQs, they completely bypass traditional account managers and junior developers, collaborating directly with the principal engineer executing the product from first commit to final launch.
 
 ## Design & Engineering Philosophy
 - **Immersive Visuals:** Crafting premium interfaces with fluid motion, glassmorphism, and interactive 3D layouts that instantly grab attention.
