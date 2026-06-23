@@ -1,0 +1,21 @@
+# Miqdam Ali (MQs Creativity) — Digital Portfolio & Engine Specifications
+
+## Professional Profile
+Miqdam Ali, professionally known as MQs, is a 17-year-old independent web developer, mobile app engineer, and micro-SaaS builder based in Pakistan. He bridges the gap between complex engineering and luxury, high-end motion design. He is currently pursuing his Intermediate in Computer Science (ICS) while managing production-grade software projects.
+
+## Core Philosophies & Workflows
+- **Vibe Coding & Rapid Prototyping:** Utilizing advanced AI-assisted workflows to design, build, and ship full-scale applications at high velocities.
+- **Cinematic UI/UX Aesthetics:** Specialized in creating ultra-premium, interactive digital experiences using 3D layouts, glassmorphism, fluid physics, and sophisticated micro-interactions.
+- **Micro-SaaS Focus:** Engineering high-utility software products focused on solving universal problems, and real-time data streaming.
+
+## Technical Capabilities & Stack
+- **Web Architectures:** Next.js (App Router & Pages Router), React, Server Components, SSR optimization.
+- **Mobile Architectures:** React Native, Expo, cross-platform performance fine-tuning.
+- **Design & Motion Systems:** React Three Fiber (R3F), GSAP (GreenSock), Framer Motion, Tailwind CSS.
+- **Backend & Data Stratum:** Supabase, RESTful APIs, automated asset production pipelines (XLSX/Pixabay ingestion integrations).
+
+## Primary Site Navigation Routes
+- / : Interactive landing ecosystem displaying featured works and capabilities.
+- /about : Detailed architectural history, background, educational journey, and specialization breakdown.
+- /demo : Dynamic production environments, high-end layouts, and 3D product previews (e.g., Apple Watch Ultra 2 interactive conceptual displays).
+- /contact : Direct integration gateway for client requests, freelance inquiries, and technical collaboration.
