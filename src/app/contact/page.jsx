@@ -2,9 +2,8 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { Metadata } from "next";
 
- export const metadata: Metadata = {
+ export const metadata= {
   title: "MQs Creativity | Contact",
   description: "Get in touch with MQs, a creative developer specializing in immersive web and mobile experiences. Whether you have a project idea or want to collaborate, reach out to discuss how we can create something extraordinary together.",
   keywords: ["MQs Creativity", "Contact", "Creative Developer", "Web Design", "Mobile App Development", "3D Motion Design", "Next.js Developer", "React Native Developer"],
