@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     {/* Brand Section */}
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-black uppercase tracking-tighter text-white">
-        MQ<span className="text-emerald-500">s</span>
+        MQ<span className="text-emerald-500">S</span>
       </h2>
       <p className="max-w-[280px] text-neutral-500 font-mono text-[10px] leading-relaxed uppercase tracking-widest">
         Architecting immersive digital experiences through 3D motion and high-end development.
