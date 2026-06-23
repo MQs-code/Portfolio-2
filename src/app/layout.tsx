@@ -8,8 +8,8 @@ const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"], variable: 
 
 // SEO Metadata - This is what Google sees
 export const metadata: Metadata = {
-  title: "Digital Portfolio | MQs Creativity",
-  description: "Innovative web experiences and creative development by MQs.",
+  title: "MQs Creativity | Digital Portfolio",
+  description: "Innovative web experiences and high-end mobile apps creative development by MQs.",
   keywords: ["MQs Creativity", "Web Design", "Portfolio", "Next.js Developer","Mobile App Development", "3D Motion Design", "Creative Developer","React Native Developer" ],
   openGraph: {
     title: "MQs Creativity",

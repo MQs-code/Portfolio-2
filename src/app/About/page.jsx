@@ -1,7 +1,14 @@
 "use client";
+import { Metadata } from "next";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+
+export const metadata: Metadata = {
+  title: "MQs Creativity | About Me",
+  description: "Learn about MQs, a creative developer specializing in immersive web and mobile experiences. Discover my philosophy, tech stack, and current projects.",
+  keywords: ["MQs Creativity", "About Me", "Creative Developer", "Web Design", "Mobile App Development", "3D Motion Design", "Next.js Developer", "React Native Developer"],
+};
 
 export default function AboutPage() {
   const containerRef = useRef(null);
