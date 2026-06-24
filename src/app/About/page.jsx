@@ -7,7 +7,6 @@ export default function AboutPage() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    // Elegant entrance reveal for luxury typesetting
     gsap.from(".reveal", {
       y: 40,
       opacity: 0,

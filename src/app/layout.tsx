@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "./Navbar/page.jsx"; // Ensure this path matches where you saved the file
+import Navbar from "./Navbar/page.jsx"; 
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-poppins" });
