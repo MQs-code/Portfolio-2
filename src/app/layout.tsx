@@ -10,6 +10,9 @@ const poppins = Poppins({ weight: ["400", "700"], subsets: ["latin"], variable: 
 export const metadata: Metadata = {
   title: "MQs Creativity | Digital Portfolio",
   description: "Innovative web experiences and high-end mobile apps creative development by MQs.",
+  verification:{
+    google:"googleb251e324bc3260c1.html",
+  },
   keywords: ["MQs Creativity", "Web Design", "Portfolio", "Next.js Developer","Mobile App Development", "3D Motion Design", "Creative Developer","React Native Developer" ],
   openGraph: {
     title: "MQs Creativity",
