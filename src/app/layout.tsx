@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body id="root-body" className={`${outfit.variable} ${poppins.variable} font-sans antialiased bg-[#030303] text-white overflow-x-hidden`}>
-        
+        <meta name="google-site-verification" content="b251e324bc3260c1" />
         {/* Navbar component handles the client-side logic */}
         <Navbar />
 
