@@ -3,8 +3,6 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-
-
 export default function AboutPage() {
   const containerRef = useRef(null);
 
